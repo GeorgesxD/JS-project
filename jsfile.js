@@ -7,12 +7,16 @@ const userinfo = [{"username":"Georges","email":"gkl001lb@aou.edu.lb","password"
 function login(){
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
-  for(let i=0;i<userinfo.length;i++){
-    if ((username === userinfo[i].username && password === userinfo[i].password) || (username === userinfo[i].email && password === userinfo[i].password) ) {
+  const storedUserInfo = localStorage.getItem("userinfo");
+  if (storedUserInfo) {
+    info = JSON.parse(storedUserInfo); 
+  }
+  for(let i=0;i<info.length;i++){
+    if ((username === info[i].username && password === info[i].password) || (username === info[i].email && password === info[i].password) ) {
         alert("Login successful!");
         break;
         
-    } else if(i===userinfo.length-1) {
+    } else if(i===info.length-1) {
         alert("Invalid Credentials, Please try again.");
     }
   }
@@ -25,8 +29,11 @@ function signup(){
   if(username2 !="" && email2 !="" && password2 !=""){
     new_user={"username":username2,"email":email2,"password":password2};
     userinfo.push(new_user);
+    localStorage.setItem("userinfo", JSON.stringify(userinfo));
+    username2.value='';
+    password2.value='';
+    email2.value='';
     alert("User Successfully Created.");
-    
   }
   else{
     alert("Missing Information. Please fill out all of the boxes.");
