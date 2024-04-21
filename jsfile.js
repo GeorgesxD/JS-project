@@ -25,7 +25,6 @@ function signup(){
   if(username2 !="" && email2 !="" && password2 !=""){
     new_user={"username":username2,"email":email2,"password":password2};
     userinfo.push(new_user);
-    console.log(userinfo);
     alert("User Successfully Created.");
     
   }
